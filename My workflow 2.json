@@ -1,0 +1,110 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "360ea12b-e1a0-4b2c-96a4-0b059fb7c89e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        256
+      ],
+      "id": "7ce5b964-9e1c-4736-a4ed-d1fe1898d051",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Limit', ``, 'number') }}",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        208
+      ],
+      "id": "746206a3-0fda-41ef-95fc-d1910c033aea",
+      "name": "Get many messages in Gmail",
+      "webhookId": "6a033301-7a67-4894-a06e-c4b556e8ca60",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "whtWTKGmLp5J8T3v",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "64a097cc-5469-46e8-aa1b-052669d3b4e4",
+      "name": "When chat message received",
+      "webhookId": "6e603912-0a30-4e4b-ad71-71fa919a616d"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many messages in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "fe7b749e-b140-47cf-98e8-772fbfc9cfcf",
+  "meta": {
+    "instanceId": "8adaca54330cd6b9634daa3fb442badc9ec0a45c6d8ab8bae4731b22f954302e"
+  },
+  "id": "dAT2hpMstrI0BqQO",
+  "tags": []
+}
